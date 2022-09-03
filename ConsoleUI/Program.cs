@@ -35,8 +35,8 @@ namespace ConsoleUI
         private static void DtoTEST(CarManager carManager)
         {
             //CarName, BrandName, ColorName, DailyPrice tablosunu getirtme (Dto ile 3 lü join)
-            List<CarDetailDto> carDetails = carManager.GetCarDetails();
-            foreach (CarDetailDto carDetail in carDetails)
+            var carDetails = carManager.GetCarDetails();
+            foreach (CarDetailDto carDetail in carDetails.Data)
             {
                 Console.WriteLine(carDetail.CarName + " " + carDetail.BrandName + " " + carDetail.ColorName + " " + carDetail.DailyPrice);
             }
@@ -53,8 +53,8 @@ namespace ConsoleUI
             colorManager.Add(new Color { Id = 5, Name = "Chrome" });
 
             //Color Listeleme testi 
-            List<Color> colors = colorManager.GetAll();
-            foreach (var color in colors)
+            var colors = colorManager.GetAll();
+            foreach (var color in colors.Data)
             {
                 Console.WriteLine(color.Name);
             }
@@ -70,8 +70,8 @@ namespace ConsoleUI
 
             //Color Id'ye göre getirme
 
-            Color color1 = colorManager.GetById(3);
-            Console.WriteLine(color1.Name);
+            var color1 = colorManager.GetById(3);
+            Console.WriteLine(color1.Data.Name);
         }
 
         private static void BrandCrudTESTS(BrandManager brandManager)
@@ -87,8 +87,8 @@ namespace ConsoleUI
 
             //Brand Listeleme testi
 
-            List<Brand> brands = brandManager.GetAll();
-            foreach (var brand in brands)
+            var brands = brandManager.GetAll();
+            foreach (var brand in brands.Data)
             {
                 Console.WriteLine(brand.Name);
             }
@@ -105,8 +105,8 @@ namespace ConsoleUI
 
 
             //Brand Id ye göre getirme
-            Brand brand1 = brandManager.GetById(2);
-            Console.WriteLine(brand1.Name);
+            var brand1 = brandManager.GetById(2);
+            Console.WriteLine(brand1.Data.Name);
         }
 
         private static void CarCrudTESTS(CarManager carManager)
@@ -123,14 +123,14 @@ namespace ConsoleUI
 
             //Brand Id ye göre filtreleme çalışıyor.
 
-            foreach (var car in carManager.GetCarsByBrandId(3))
+            foreach (var car in carManager.GetCarsByBrandId(3).Data)
             {
                 Console.WriteLine("{0} {1}", car.Id, car.Description);
             }
 
             //Color Id ye göre filtreleme çalışıyor.
 
-            foreach (var car in carManager.GetCarsByColorId(2))
+            foreach (var car in carManager.GetCarsByColorId(2).Data)
             {
                 Console.WriteLine("{0} {1}", car.Id, car.Description);
             }
