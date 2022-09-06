@@ -30,6 +30,10 @@ namespace ConsoleUI
 
             //DtoTEST(carManager);
 
+            carManager.Add(new Car { BrandId = 2, ColorId = 1, DailyPrice = 200, Description = "clio", ModelYear = 19299 });
+            //brandManager.Add(new Brand { Name = "BMW" });
+            //colorManager.Add(new Color { Name = "White" });
+
         }
 
         private static void DtoTEST(CarManager carManager)
@@ -111,15 +115,15 @@ namespace ConsoleUI
 
         private static void CarCrudTESTS(CarManager carManager)
         {
-            //Veri eklemeler. ID otomatik artan olarak düzenlenmeli...
+            //Veri eklemeler. ID otomatik artan olarak düzenlendi...
 
-            carManager.Add(new Car { Id = 1, BrandId = 3, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Opel Sedan" });
-            carManager.Add(new Car { Id = 2, BrandId = 1, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Renault Sedan" });
-            carManager.Add(new Car { Id = 3, BrandId = 2, ColorId = 2, DailyPrice = 200, ModelYear = 2012, Description = "BMW Sedan" });
-            carManager.Add(new Car { Id = 4, BrandId = 1, ColorId = 1, DailyPrice = 400, ModelYear = 2015, Description = "Renault Hatchback" });
-            carManager.Add(new Car { Id = 5, BrandId = 3, ColorId = 1, DailyPrice = 200, ModelYear = 2016, Description = "Opel Sedan" });
-            carManager.Add(new Car { Id = 6, BrandId = 1, ColorId = 3, DailyPrice = 400, ModelYear = 2014, Description = "Renault Sedan" });
-            carManager.Add(new Car { Id = 7, BrandId = 4, ColorId = 2, DailyPrice = 100, ModelYear = 2014, Description = "Mercedes Sedan" });
+            carManager.Add(new Car {BrandId = 3, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Astra 1.6" });
+            carManager.Add(new Car {BrandId = 1, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Megan 1.6" });
+            carManager.Add(new Car {BrandId = 2, ColorId = 2, DailyPrice = 200, ModelYear = 2012, Description = "M5" });
+            carManager.Add(new Car {BrandId = 1, ColorId = 1, DailyPrice = 400, ModelYear = 2015, Description = "Megan 2.0" });
+            carManager.Add(new Car {BrandId = 3, ColorId = 1, DailyPrice = 200, ModelYear = 2016, Description = "Insigna 1.2" });
+            carManager.Add(new Car {BrandId = 1, ColorId = 3, DailyPrice = 400, ModelYear = 2014, Description = "Clio 1.0" });
+            carManager.Add(new Car {BrandId = 4, ColorId = 2, DailyPrice = 100, ModelYear = 2014, Description = "G63" });
 
             //Brand Id ye göre filtreleme çalışıyor.
 
