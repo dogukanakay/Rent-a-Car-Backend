@@ -9,7 +9,7 @@ namespace Business.Constants
     public static class Messages
     {
         public static string ExampleSuccessMessage = "İşlem gerçekleştirildi.";
-        public static string ExampleErrorMessage = "İşlem gerçekleştirildi.";
+        public static string ExampleErrorMessage = "İşlem gerçekleştirilemedi.";
 
     }
 }

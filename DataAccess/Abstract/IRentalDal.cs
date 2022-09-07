@@ -1,4 +1,6 @@
 ﻿using Core.DataAccess;
+using Core.Utilities.Results;
+using Entites.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,5 +12,6 @@ namespace DataAccess.Abstract
 {
     public interface IRentalDal: IEntityRepository<Rental>
     {
+       Rental GetByCarId(int id);
     }
 }

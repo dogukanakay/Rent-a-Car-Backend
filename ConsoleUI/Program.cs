@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using DataAccess.Concrete.EntityFramework;
 using Entites.Concrete;
 using Entities.DTOs;
+using Microsoft.VisualBasic;
 
 namespace ConsoleUI
 {
@@ -25,15 +26,43 @@ namespace ConsoleUI
 
             //ColorCrudTESTS(colorManager);
 
-
             //CarName, BrandName, ColorName, DailyPrice tablosunu getirtme (Dto ile 3 lü join)
 
             //DtoTEST(carManager);
 
-            carManager.Add(new Car { BrandId = 2, ColorId = 1, DailyPrice = 200, Description = "clio", ModelYear = 19299 });
-            //brandManager.Add(new Brand { Name = "BMW" });
-            //colorManager.Add(new Color { Name = "White" });
+            UserManager userManager = new UserManager(new EfUserDal());
+            //UsersCrudTESTS(userManager);
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            
+            //CustomersCrudTESTS(customerManager);
 
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            //rentalManager.Add(new Rental { Id = 1, CarId = 2, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+            //rentalManager.Add(new Rental { Id = 2, CarId = 2, CustomerId = 1, RentDate = new DateTime(2022, 07, 09, 20, 20, 00) });
+            //rentalManager.Add(new Rental { Id = 3, CarId = 3, CustomerId = 5, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+            //rentalManager.Add(new Rental { Id = 4, CarId = 4, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00) });
+            //rentalManager.Add(new Rental { Id = 5, CarId = 3, CustomerId = 5, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+
+            rentalManager.Update(new Rental { Id = 4, CarId = 4, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+
+        }
+
+        private static void CustomersCrudTESTS(CustomerManager customerManager)
+        {
+            customerManager.Add(new Customer { UserId = 1, CompanyName = "Lehyan" });
+            customerManager.Add(new Customer { UserId = 2, CompanyName = "Laleli" });
+            customerManager.Add(new Customer { UserId = 5, CompanyName = "Nef" });
+        }
+
+        private static void UsersCrudTESTS(UserManager userManager)
+        {
+            userManager.Add(new User { Id = 1, FirstName = "Doğukan", LastName = "Akay", Email = "das512ad@gmail.com", Password = "21q421nl4421" });
+            userManager.Add(new User { Id = 2, FirstName = "Mert", LastName = "Soya", Email = "dssas51ad@gmail.com", Password = "asfas421nl4421" });
+            userManager.Add(new User { Id = 3, FirstName = "Yunus", LastName = "Elma", Email = "da21d21sad@gmail.com", Password = "512dasdl4421" });
+            userManager.Add(new User { Id = 4, FirstName = "Ali", LastName = "Akay", Email = "dasd21d@gmail.com", Password = "21q421dasdas1" });
+            userManager.Add(new User { Id = 5, FirstName = "Fidan", LastName = "Azi", Email = "d2421d@gmail.com", Password = "21q4sbsdvsd21" });
+            userManager.Add(new User { Id = 6, FirstName = "Lesi", LastName = "Kesi", Email = "da21d21@gmail.com", Password = "ascvasvas" });
         }
 
         private static void DtoTEST(CarManager carManager)
@@ -117,13 +146,13 @@ namespace ConsoleUI
         {
             //Veri eklemeler. ID otomatik artan olarak düzenlendi...
 
-            carManager.Add(new Car {BrandId = 3, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Astra 1.6" });
-            carManager.Add(new Car {BrandId = 1, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Megan 1.6" });
-            carManager.Add(new Car {BrandId = 2, ColorId = 2, DailyPrice = 200, ModelYear = 2012, Description = "M5" });
-            carManager.Add(new Car {BrandId = 1, ColorId = 1, DailyPrice = 400, ModelYear = 2015, Description = "Megan 2.0" });
-            carManager.Add(new Car {BrandId = 3, ColorId = 1, DailyPrice = 200, ModelYear = 2016, Description = "Insigna 1.2" });
-            carManager.Add(new Car {BrandId = 1, ColorId = 3, DailyPrice = 400, ModelYear = 2014, Description = "Clio 1.0" });
-            carManager.Add(new Car {BrandId = 4, ColorId = 2, DailyPrice = 100, ModelYear = 2014, Description = "G63" });
+            carManager.Add(new Car { Id = 1, BrandId = 3, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Astra 1.6" });
+            carManager.Add(new Car { Id = 2, BrandId = 1, ColorId = 3, DailyPrice = 100, ModelYear = 2012, Description = "Megan 1.6" });
+            carManager.Add(new Car { Id = 3, BrandId = 2, ColorId = 2, DailyPrice = 200, ModelYear = 2012, Description = "M5" });
+            carManager.Add(new Car { Id = 4, BrandId = 1, ColorId = 1, DailyPrice = 400, ModelYear = 2015, Description = "Megan 2.0" });
+            carManager.Add(new Car { Id = 5, BrandId = 3, ColorId = 1, DailyPrice = 200, ModelYear = 2016, Description = "Insigna 1.2" });
+            carManager.Add(new Car { Id = 6, BrandId = 1, ColorId = 3, DailyPrice = 400, ModelYear = 2014, Description = "Clio 1.0" });
+            carManager.Add(new Car { Id = 7, BrandId = 4, ColorId = 2, DailyPrice = 100, ModelYear = 2014, Description = "G63" });
 
             //Brand Id ye göre filtreleme çalışıyor.
 

@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entites.Concrete;
 using Entities.DTOs;
 using System;
@@ -72,6 +73,11 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.DailyPrice = car.DailyPrice;
             carToUpdate.Description = car.Description;
+        }
+
+        List<CarDetailDto> ICarDal.GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }
