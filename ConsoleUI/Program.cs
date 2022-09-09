@@ -32,20 +32,24 @@ namespace ConsoleUI
 
             UserManager userManager = new UserManager(new EfUserDal());
             //UsersCrudTESTS(userManager);
+
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            
             //CustomersCrudTESTS(customerManager);
 
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //RentalCrudTESTS(rentalManager);
 
-            //rentalManager.Add(new Rental { Id = 1, CarId = 2, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
-            //rentalManager.Add(new Rental { Id = 2, CarId = 2, CustomerId = 1, RentDate = new DateTime(2022, 07, 09, 20, 20, 00) });
-            //rentalManager.Add(new Rental { Id = 3, CarId = 3, CustomerId = 5, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
-            //rentalManager.Add(new Rental { Id = 4, CarId = 4, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00) });
-            //rentalManager.Add(new Rental { Id = 5, CarId = 3, CustomerId = 5, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+        }
+
+        private static void RentalCrudTESTS(RentalManager rentalManager)
+        {
+            rentalManager.Add(new Rental { Id = 1, CarId = 2, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+            rentalManager.Add(new Rental { Id = 2, CarId = 2, CustomerId = 1, RentDate = new DateTime(2022, 07, 09, 20, 20, 00) });
+            rentalManager.Add(new Rental { Id = 3, CarId = 3, CustomerId = 5, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+            rentalManager.Add(new Rental { Id = 4, CarId = 4, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00) });
+            rentalManager.Add(new Rental { Id = 5, CarId = 3, CustomerId = 5, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
 
             rentalManager.Update(new Rental { Id = 4, CarId = 4, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
-
         }
 
         private static void CustomersCrudTESTS(CustomerManager customerManager)
