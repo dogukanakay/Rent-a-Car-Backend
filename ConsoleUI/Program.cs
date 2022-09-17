@@ -38,6 +38,7 @@ namespace ConsoleUI
 
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             //RentalCrudTESTS(rentalManager);
+            
 
         }
 
@@ -50,6 +51,11 @@ namespace ConsoleUI
             rentalManager.Add(new Rental { Id = 5, CarId = 3, CustomerId = 5, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
 
             rentalManager.Update(new Rental { Id = 4, CarId = 4, CustomerId = 2, RentDate = new DateTime(2022, 07, 09, 20, 20, 00), ReturnDate = DateTime.Now });
+           //Sadece istenilen yeri update etme.
+            Rental updateRental = new Rental();
+            updateRental = rentalManager.Get(2).Data;
+            updateRental.ReturnDate = DateTime.Now;
+            rentalManager.Update(updateRental);
         }
 
         private static void CustomersCrudTESTS(CustomerManager customerManager)
