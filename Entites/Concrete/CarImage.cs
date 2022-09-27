@@ -1,4 +1,4 @@
-﻿using Core.Entity;
+﻿using Core.Entity.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class CarImages:IEntity
+    public class CarImage:IEntity
     {
         public int Id { get; set; }
         public int CarId { get; set; }

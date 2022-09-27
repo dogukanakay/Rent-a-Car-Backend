@@ -28,9 +28,7 @@ namespace Business.Concrete
         {
                 _carDal.Add(car);
                 return new SuccessResult(Messages.ExampleSuccessMessage);
-            
-            
-            
+                                    
         }
         
 
@@ -39,6 +37,7 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
             _carDal.Update(car);

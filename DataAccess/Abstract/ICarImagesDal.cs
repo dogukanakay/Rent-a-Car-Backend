@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarImagesDal:IEntityRepository<CarImages>
+    public interface ICarImagesDal:IEntityRepository<CarImage>
     {
     }
 }
