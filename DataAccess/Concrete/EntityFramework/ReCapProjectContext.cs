@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb; Database= ReCapProject; Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=ABRA; Database= ReCapProject; Trusted_Connection=true");
         }
 
 
