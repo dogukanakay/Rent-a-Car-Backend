@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,9 +21,10 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
-
+        [TransactionScopeAspect]
         public IResult Add(Rental rental)
         {
+            
             if (_rentalDal.GetByCarId(rental.CarId)==null)
             {
                 _rentalDal.Add(rental);
@@ -45,7 +49,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
-
+        [CacheAspect]
+        [PerformanceAspect(0)]
+        [TransactionScopeAspect]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.ExampleSuccessMessage);

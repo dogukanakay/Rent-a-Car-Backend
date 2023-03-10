@@ -1,4 +1,5 @@
-﻿using Business.Concrete;
+﻿using Business.Abstract;
+using Business.Concrete;
 using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entites.Concrete;
@@ -12,7 +13,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
+            rentalManager.Add(new Rental
+            {
+                CarId = 3, CustomerId=1, RentDate = DateTime.Now, ReturnDate = DateTime.Now,
+            });
 
         }
 
