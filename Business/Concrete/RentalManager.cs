@@ -1,8 +1,10 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,17 +24,17 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
         [TransactionScopeAspect]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Add(Rental rental)
         {
-            
-            if (_rentalDal.GetByCarId(rental.CarId)==null)
+            if (_rentalDal.GetByCarId(rental.CarId) == null)
             {
                 _rentalDal.Add(rental);
                 return new SuccessResult(Messages.ExampleSuccessMessage);
             }
             else if (_rentalDal.GetByCarId(rental.CarId).ReturnDate == null)
             {
-                return new ErrorResult(Messages.ExampleErrorMessage);
+                return new ErrorResult(Messages.CarAlreadyRented);
             }
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.ExampleSuccessMessage);
@@ -52,6 +54,7 @@ namespace Business.Concrete
         [CacheAspect]
         [PerformanceAspect(0)]
         [TransactionScopeAspect]
+        [LogAspect(typeof(FileLogger))]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.ExampleSuccessMessage);
