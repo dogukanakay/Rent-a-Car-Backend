@@ -28,10 +28,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        
+
         public IActionResult Add(Rental rental)
         {
-            var result =_rentalService.Add(rental);
+            var result = _rentalService.Add(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -61,6 +61,19 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpGet("getdetails")]
+
+        public IActionResult GetDetails() 
+        {
+            var result = _rentalService.GetRentalDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        
         }
     }
 }

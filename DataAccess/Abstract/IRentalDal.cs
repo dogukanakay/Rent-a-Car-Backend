@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using Entites.Concrete;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace DataAccess.Abstract
 {
     public interface IRentalDal: IEntityRepository<Rental>
     {
-       Rental GetByCarId(int id);
+        Rental GetByCarId(int id);
+        List<RentalDetailDto> GetRentalDetails();
     }
 }
