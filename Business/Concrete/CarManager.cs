@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -44,21 +45,21 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>( _carDal.GetAll(c=> c.BrandId == id), Messages.ExampleSuccessMessage);
+            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetails().Where(b => id == b.BrandId).ToList(), Messages.ExampleSuccessMessage);
         }
 
-        public IDataResult< List<Car>> GetCarsByColorId(int id)
+        public IDataResult< List<CarDetailDto>> GetCarsByColorId(int id)
         {
-            return new SuccessDataResult<List<Car>>( _carDal.GetAll(c => c.ColorId == id), Messages.ExampleSuccessMessage);
+            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetails().Where(c=> c.ColorId == id).ToList(), Messages.ExampleSuccessMessage);
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>( _carDal.GetAll(), Messages.ExampleSuccessMessage);
         }
-
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetails(), Messages.ExampleSuccessMessage);
