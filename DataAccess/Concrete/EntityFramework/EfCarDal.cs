@@ -78,5 +78,22 @@ namespace DataAccess.Concrete.EntityFramework
 
             }
         }
+
+        public CarDetailDto GetCarDetailsByCarId(int carId)  ///daha sonra buraları düzenle list to cardetaildto yapmak gerekiyor.
+        {
+            using (ReCapProjectContext context = new ReCapProjectContext())
+            {
+                var result = from c in context.Cars
+                             join co in context.Colors
+                             on c.ColorId equals co.Id
+                             join b in context.Brands
+                             on c.BrandId equals b.Id
+                             where c.Id == carId
+                             select new CarDetailDto { CarId = c.Id, CarName = c.Description, BrandName = b.Name, ColorName = co.Name, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, BrandId = b.Id, ColorId = co.Id };
+
+                return result.Single();
+
+            }
+        }
     }
 }
