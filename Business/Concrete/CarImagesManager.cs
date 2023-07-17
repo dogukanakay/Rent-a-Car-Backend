@@ -65,7 +65,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckCarImage(carId));
             if (result != null)
             {
-                return new ErrorDataResult<List<CarImage>>(GetDefaultImage(carId).Data);
+                return new SuccessDataResult<List<CarImage>>(GetDefaultImage(carId).Data);
             }
             return new SuccessDataResult<List<CarImage>>(_carImagesDal.GetAll(c => c.CarId == carId));
         }
@@ -87,7 +87,7 @@ namespace Business.Concrete
 
         private IDataResult<List<CarImage>> GetDefaultImage(int carId)
         {
-            List<CarImage> carImages = new List<CarImage> { new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = "Uploads\\default.png" } };
+            List<CarImage> carImages = new List<CarImage> { new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = "default.jpg" } };
             return new SuccessDataResult<List<CarImage>>(carImages);
         }
 
