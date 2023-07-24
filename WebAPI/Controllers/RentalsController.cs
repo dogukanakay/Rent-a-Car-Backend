@@ -2,6 +2,7 @@
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebAPI.Controllers
 {
@@ -74,6 +75,21 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         
+        }
+
+        [HttpGet("isrentable")]
+
+        public IActionResult IsRentable(int carId, DateTime rentDate, DateTime returnDate) 
+        {
+            if(_rentalService.IsRentable(carId, rentDate, returnDate))
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return Ok(false);
+            }
+            
         }
     }
 }

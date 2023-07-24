@@ -37,6 +37,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CarAlreadyRented);
             }
+           
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
@@ -65,6 +66,20 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.ExampleSuccessMessage);
 
+        }
+
+        public bool IsRentable(int carId,DateTime rentDate, DateTime returnDate)
+        {
+            var rentCar = _rentalDal.GetAll().Where(
+                c => c.CarId == carId && rentDate<=c.ReturnDate && returnDate>=c.RentDate);
+            if(rentCar.Any())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public IResult Update(Rental rental)
