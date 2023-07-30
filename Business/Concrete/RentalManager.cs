@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -26,6 +28,7 @@ namespace Business.Concrete
         }
         [TransactionScopeAspect]
         [CacheRemoveAspect("IRentalService.Get")]
+        
         public IResult Add(Rental rental)
         {
             if (_rentalDal.GetByCarId(rental.CarId) == null)
@@ -36,10 +39,17 @@ namespace Business.Concrete
             else if (_rentalDal.GetByCarId(rental.CarId).ReturnDate == null)
             {
                 return new ErrorResult(Messages.CarAlreadyRented);
+            }else if(IsRentable(rental).Success)
+            {
+                _rentalDal.Add(rental);
+                return new SuccessResult(Messages.ExampleSuccessMessage);
+            }
+            else
+            {
+                return new ErrorResult(Messages.ExampleErrorMessage);
             }
            
-            _rentalDal.Add(rental);
-            return new SuccessResult(Messages.ExampleSuccessMessage);
+           
         }
 
         public IResult Delete(Rental rental)
@@ -67,18 +77,20 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.ExampleSuccessMessage);
 
         }
-
-        public bool IsRentable(int carId,DateTime rentDate, DateTime returnDate)
+        [ValidationAspect(typeof(RentalValidator))]
+        public IResult IsRentable(Rental rental)
         {
             var rentCar = _rentalDal.GetAll().Where(
-                c => c.CarId == carId && rentDate<=c.ReturnDate && returnDate>=c.RentDate);
+                c => c.CarId == rental.CarId && rental.RentDate<=c.ReturnDate && rental.ReturnDate>=c.RentDate);
+
             if(rentCar.Any())
             {
-                return false;
+                return new ErrorResult();
             }
             else
             {
-                return true;
+              
+                return new SuccessResult();
             }
         }
 

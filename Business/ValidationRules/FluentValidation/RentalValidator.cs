@@ -12,7 +12,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public RentalValidator()
         {
-            
+            RuleFor(r=>r.ReturnDate).GreaterThan(r=>r.RentDate).WithMessage("Hatalı tarih seçimi yaptınız.");
         }
     }
 }

@@ -77,11 +77,11 @@ namespace WebAPI.Controllers
         
         }
 
-        [HttpGet("isrentable")]
+        [HttpPost("isrentable")]
 
-        public IActionResult IsRentable(int carId, DateTime rentDate, DateTime returnDate) 
+        public IActionResult IsRentable(Rental rental) 
         {
-            if(_rentalService.IsRentable(carId, rentDate, returnDate))
+            if(_rentalService.IsRentable(rental).Success)
             {
                 return Ok(true);
             }
