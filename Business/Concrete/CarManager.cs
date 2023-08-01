@@ -28,14 +28,15 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.ExampleSuccessMessage);
                                     
         }
-        
 
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
@@ -71,6 +72,11 @@ namespace Business.Concrete
         public IDataResult<CarDetailDto> GetCarDetailsByCarId(int carId)
         {
             return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailsByCarId(carId));
+        }
+
+        public IDataResult<Car> GetByCarId(int carId)
+        {
+            return new SuccessDataResult<Car>(_carDal.Get(c=>c.Id== carId), Messages.ExampleSuccessMessage);
         }
     }
 }

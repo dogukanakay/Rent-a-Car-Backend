@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -35,7 +36,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.ExampleSuccessMessage);
         }
-
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
