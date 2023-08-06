@@ -41,7 +41,7 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CarAlreadyRented);
             }else if(IsRentable(rental).Success)
             {
-                _rentalDal.Add(rental);
+                _rentalDal.Add(rental); 
                 return new SuccessResult(Messages.ExampleSuccessMessage);
             }
             else
@@ -61,7 +61,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> Get(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentId == id));
         }
         [CacheAspect]
         [PerformanceAspect(0)]
@@ -81,7 +81,7 @@ namespace Business.Concrete
         public IResult IsRentable(Rental rental)
         {
             var rentCar = _rentalDal.GetAll().Where(
-                c => c.CarId == rental.CarId && rental.RentDate<=c.ReturnDate && rental.ReturnDate>=c.RentDate);
+                c => c.CarId == rental.CarId && rental.RentDate<=c.ReturnDate && rental.ReturnDate>=c.RentDate && rental.ReturnDateActual >= c.RentDate);
 
             if(rentCar.Any())
             {

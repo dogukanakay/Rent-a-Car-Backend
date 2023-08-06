@@ -25,6 +25,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  CompanyName = cu.CompanyName,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
+                                 FindexScore = cu.FindexScore
+                                 
                              };
                 return result.ToList();
             }

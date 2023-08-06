@@ -18,10 +18,31 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from c in context.Cars
                              join co in context.Colors
-                             on c.ColorId equals co.Id
+                             on c.ColorId equals co.ColorId
+                             join cl in context.CarClasses
+                             on c.ClassId equals cl.ClassId
                              join b in context.Brands
-                             on c.BrandId equals b.Id  
-                             select new CarDetailDto { CarId = c.Id, CarName = c.Description ,BrandName = b.Name, ColorName = co.Name, ModelYear = c.ModelYear ,DailyPrice = c.DailyPrice, BrandId = b.Id, ColorId = co.Id };
+                             on c.BrandId equals b.BrandId 
+                             join m in context.Models
+                             on c.ModelId equals m.ModelId
+                             join f in context.FuelTypes
+                             on c.FuelTypeId equals f.FuelId
+                             join g in context.GearTypes
+                             on c.GearTypeId equals g.GearId
+                             select new CarDetailDto 
+                             { 
+                                 CarId = c.CarId,
+                                 ClassName = cl.ClassName,
+                                 BrandName = b.BrandName, 
+                                 ModelName = m.ModelName,
+                                 FuelTypeName = f.FuelName,
+                                 GearTypeName = g.GearName,
+                                 ColorName = co.ColorName, 
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice, 
+                                 Description = c.Description,
+                                 FindexScore = c.FindexScore,
+                             };
 
                 return result.ToList();
 
@@ -34,12 +55,32 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from c in context.Cars
                              join co in context.Colors
-                             on c.ColorId equals co.Id
+                             on c.ColorId equals co.ColorId
+                             join cl in context.CarClasses
+                             on c.ClassId equals cl.ClassId
                              join b in context.Brands
-                             on c.BrandId equals b.Id
+                             on c.BrandId equals b.BrandId
+                             join m in context.Models
+                             on c.ModelId equals m.ModelId
+                             join f in context.FuelTypes
+                             on c.FuelTypeId equals f.FuelId
+                             join g in context.GearTypes
+                             on c.GearTypeId equals g.GearId
                              where c.BrandId == brandId
-                             select new CarDetailDto { CarId = c.Id, CarName = c.Description, BrandName = b.Name, ColorName = co.Name, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, BrandId = b.Id, ColorId = co.Id };
-
+                             select new CarDetailDto
+                             {
+                                 CarId = c.CarId,
+                                 ClassName = cl.ClassName,
+                                 BrandName = b.BrandName,
+                                 ModelName = m.ModelName,
+                                 FuelTypeName = f.FuelName,
+                                 GearTypeName = g.GearName,
+                                 ColorName = co.ColorName,
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
+                                 FindexScore = c.FindexScore,
+                             };
                 return result.ToList();
 
             }
@@ -51,12 +92,32 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from c in context.Cars
                              join co in context.Colors
-                             on c.ColorId equals co.Id
+                             on c.ColorId equals co.ColorId
+                             join cl in context.CarClasses
+                             on c.ClassId equals cl.ClassId
                              join b in context.Brands
-                             on c.BrandId equals b.Id
+                             on c.BrandId equals b.BrandId
+                             join m in context.Models
+                             on c.ModelId equals m.ModelId
+                             join f in context.FuelTypes
+                             on c.FuelTypeId equals f.FuelId
+                             join g in context.GearTypes
+                             on c.GearTypeId equals g.GearId
                              where c.BrandId == brandId && c.ColorId == colorId
-                             select new CarDetailDto { CarId = c.Id, CarName = c.Description, BrandName = b.Name, ColorName = co.Name, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, BrandId = b.Id, ColorId = co.Id };
-
+                             select new CarDetailDto
+                             {
+                                 CarId = c.CarId,
+                                 ClassName = cl.ClassName,
+                                 BrandName = b.BrandName,
+                                 ModelName = m.ModelName,
+                                 FuelTypeName = f.FuelName,
+                                 GearTypeName = g.GearName,
+                                 ColorName = co.ColorName,
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
+                                 FindexScore = c.FindexScore,
+                             };
                 return result.ToList();
 
             }
@@ -68,12 +129,32 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from c in context.Cars
                              join co in context.Colors
-                             on c.ColorId equals co.Id
+                             on c.ColorId equals co.ColorId
+                             join cl in context.CarClasses
+                             on c.ClassId equals cl.ClassId
                              join b in context.Brands
-                             on c.BrandId equals b.Id
+                             on c.BrandId equals b.BrandId
+                             join m in context.Models
+                             on c.ModelId equals m.ModelId
+                             join f in context.FuelTypes
+                             on c.FuelTypeId equals f.FuelId
+                             join g in context.GearTypes
+                             on c.GearTypeId equals g.GearId
                              where c.ColorId == colorId
-                             select new CarDetailDto { CarId = c.Id, CarName = c.Description, BrandName = b.Name, ColorName = co.Name, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, BrandId = b.Id, ColorId = co.Id };
-
+                             select new CarDetailDto
+                             {
+                                 CarId = c.CarId,
+                                 ClassName = cl.ClassName,
+                                 BrandName = b.BrandName,
+                                 ModelName = m.ModelName,
+                                 FuelTypeName = f.FuelName,
+                                 GearTypeName = g.GearName,
+                                 ColorName = co.ColorName,
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
+                                 FindexScore = c.FindexScore,
+                             };
                 return result.ToList();
 
             }
@@ -85,12 +166,32 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from c in context.Cars
                              join co in context.Colors
-                             on c.ColorId equals co.Id
+                             on c.ColorId equals co.ColorId
+                             join cl in context.CarClasses
+                             on c.ClassId equals cl.ClassId
                              join b in context.Brands
-                             on c.BrandId equals b.Id
-                             where c.Id == carId
-                             select new CarDetailDto { CarId = c.Id, CarName = c.Description, BrandName = b.Name, ColorName = co.Name, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, BrandId = b.Id, ColorId = co.Id };
-
+                             on c.BrandId equals b.BrandId
+                             join m in context.Models
+                             on c.ModelId equals m.ModelId
+                             join f in context.FuelTypes
+                             on c.FuelTypeId equals f.FuelId
+                             join g in context.GearTypes
+                             on c.GearTypeId equals g.GearId
+                             where c.CarId == carId
+                             select new CarDetailDto
+                             {
+                                 CarId = c.CarId,
+                                 ClassName = cl.ClassName,
+                                 BrandName = b.BrandName,
+                                 ModelName = m.ModelName,
+                                 FuelTypeName = f.FuelName,
+                                 GearTypeName = g.GearName,
+                                 ColorName = co.ColorName,
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
+                                 FindexScore = c.FindexScore,
+                             };
                 return result.Single();
 
             }

@@ -76,7 +76,7 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetByCarId(int carId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c=>c.Id== carId), Messages.ExampleSuccessMessage);
+            return new SuccessDataResult<Car>(_carDal.Get(c=>c.CarId== carId), Messages.ExampleSuccessMessage);
         }
     }
 }

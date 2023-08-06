@@ -8,13 +8,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Customer:IEntity
+    public class GearType:IEntity
     {
         [Key]
-        public int CustomerId { get; set; }
-        public int UserId { get; set; }
-        public string CompanyName { get; set; }
-        public int FindexScore { get; set; }
-
+        public int GearId { get; set; }
+        public string GearName { get; set;}
     }
 }
