@@ -3,7 +3,7 @@ using Entites.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Concrete.EntityFramework
+namespace DataAccess.Concrete.Context
 {
     public class ReCapProjectContext : DbContext
     {

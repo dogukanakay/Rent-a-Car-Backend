@@ -1,9 +1,4 @@
 ﻿using Core.Entities.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.DTOs
 {
@@ -20,7 +15,17 @@ namespace Entities.DTOs
         public double DailyPrice { get; set; }
         public int FindexScore { get; set; }
         public string Description { get; set; }
-    
+
+
+
+
+     // Filters Tools
+        public int? BrandId { get; set; }
+        public int? ModelId { get; set; }
+        public int? GearId { get; set; }
+        public int? FuelId { get; set; }
+        public int? ColorId { get; set; }
+
 
     }
 }

@@ -11,11 +11,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -31,15 +27,7 @@ namespace Business.Concrete
         
         public IResult Add(Rental rental)
         {
-            if (_rentalDal.GetByCarId(rental.CarId) == null)
-            {
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.ExampleSuccessMessage);
-            }
-            else if (_rentalDal.GetByCarId(rental.CarId).ReturnDate == null)
-            {
-                return new ErrorResult(Messages.CarAlreadyRented);
-            }else if(IsRentable(rental).Success)
+            if(IsRentable(rental).Success)
             {
                 _rentalDal.Add(rental); 
                 return new SuccessResult(Messages.ExampleSuccessMessage);
@@ -80,17 +68,18 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult IsRentable(Rental rental)
         {
-            var rentCar = _rentalDal.GetAll().Where(
-                c => c.CarId == rental.CarId && rental.RentDate<=c.ReturnDate && rental.ReturnDate>=c.RentDate && rental.ReturnDateActual >= c.RentDate);
+            var rentCar = _rentalDal.Get(c => c.CarId == rental.CarId && rental.RentDate <= c.ReturnDate &&
+                    rental.ReturnDate >= c.RentDate && rental.ReturnDateActual >= c.RentDate);
+               
 
-            if(rentCar.Any())
+            if(rentCar == null)
             {
-                return new ErrorResult();
+                return new SuccessResult();
             }
             else
             {
-              
-                return new SuccessResult();
+                return new ErrorResult();
+                
             }
         }
 
