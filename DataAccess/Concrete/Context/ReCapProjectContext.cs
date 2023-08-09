@@ -20,6 +20,7 @@ namespace DataAccess.Concrete.Context
         public DbSet<GearType> GearTypes { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<CarClass> CarClasses { get; set; }
+        public DbSet<RentalLocation> RentalLocations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

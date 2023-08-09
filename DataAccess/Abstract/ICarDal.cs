@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using Entites.Concrete;
 using Entities.DTOs;
+using Entities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,8 @@ namespace DataAccess.Abstract
 {
     public interface ICarDal:IEntityRepository<Car>
     {
-        List<CarDetailDto> GetCarDetails();
-        List<CarDetailDto> GetCarDetailsByBrandId(int brandId);
-        List<CarDetailDto> GetCarDetailsByColorId(int colorId);
-        List<CarDetailDto> GetCarDetailsByBrandIdAndColorId(int brandId, int colorId);
+        List<CarDetailDto> GetCarDetails(CarDetailFilter carDetailFilter);
+
         CarDetailDto GetCarDetailsByCarId(int carId);
 
     }

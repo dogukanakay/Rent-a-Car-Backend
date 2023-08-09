@@ -3,6 +3,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.Context;
 using Entites.Concrete;
 using Entities.DTOs;
+using Entities.Filters;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
                    join m in context.Models on c.ModelId equals m.ModelId
                    join f in context.FuelTypes on c.FuelTypeId equals f.FuelId
                    join g in context.GearTypes on c.GearTypeId equals g.GearId
+                   join l in context.RentalLocations on c.LocationId equals l.LocationId
                    select new CarDetailDto
                    {
                        CarId = c.CarId,
@@ -40,52 +42,32 @@ namespace DataAccess.Concrete.EntityFramework
                        BrandId = c.BrandId,
                        FuelId = c.FuelTypeId,
                        GearId = c.GearTypeId,
-                       ModelId = c.ModelId
+                       ModelId = c.ModelId,
+                       LocationId = c.LocationId
                    };
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetCarDetails(CarDetailFilter carDetailFilter)
         {
             using (ReCapProjectContext context = new ReCapProjectContext())
             {
-                var result = GetCarDetailQuery(context).ToList();
+                var result = GetCarDetailQuery(context);
 
-                return result;
+                result = carDetailFilter.LocationId.HasValue ? result.Where(c => c.LocationId == carDetailFilter.LocationId) : result;
+                result = carDetailFilter.BrandId.HasValue ? result.Where(c => c.BrandId == carDetailFilter.BrandId) : result;
+                result = carDetailFilter.ColorId.HasValue ? result.Where(c => c.ColorId == carDetailFilter.ColorId) : result;
+                result = carDetailFilter.FuelId.HasValue ? result.Where(c => c.FuelId == carDetailFilter.FuelId) : result;
+                result = carDetailFilter.GearId.HasValue ? result.Where(c => c.GearId == carDetailFilter.GearId) : result;
+                result = carDetailFilter.ModelId.HasValue ? result.Where(c => c.ModelId == carDetailFilter.ModelId) : result;
+
+
+                return result.ToList();
 
             }
         }
 
-        public List<CarDetailDto> GetCarDetailsByBrandId(int brandId)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                var result = GetCarDetailQuery(context).Where(c=>c.BrandId ==brandId ).ToList();
-                return result;
 
-            }
-        }
-
-        public List<CarDetailDto> GetCarDetailsByBrandIdAndColorId(int brandId, int colorId)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                var result = GetCarDetailQuery(context).Where(c => c.BrandId == brandId && c.ColorId == colorId).ToList();
-                return result;
-
-            }
-        }
-
-        public List<CarDetailDto> GetCarDetailsByColorId(int colorId)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                var result = GetCarDetailQuery(context).Where(c => c.ColorId == colorId).ToList();
-                return result;
-
-            }
-        }
-
-        public CarDetailDto GetCarDetailsByCarId(int carId)  ///daha sonra buraları düzenle list to cardetaildto yapmak gerekiyor.
+        public CarDetailDto GetCarDetailsByCarId(int carId)  
         {
             using (ReCapProjectContext context = new ReCapProjectContext())
             {

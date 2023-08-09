@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using Entites.Concrete;
 using Entities.Concrete;
 using Entities.DTOs;
+using Entities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace DataAccess.Abstract
     public interface IRentalDal: IEntityRepository<Rental>
     {
         RentalDetailDto GetRentalDetailsByRentId(int rentId);
-        List<RentalDetailDto> GetRentalDetails();
+        List<RentalDetailDto> GetRentalDetails(RentalDetailFilter rentalDetailFilter);
         
     }
 }

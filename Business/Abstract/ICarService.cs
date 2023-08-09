@@ -1,6 +1,7 @@
 ﻿using Core.Utilities.Results;
 using Entites.Concrete;
 using Entities.DTOs;
+using Entities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,12 @@ namespace Business.Abstract
     {
         IResult Add(Car car);
         IDataResult<CarDetailDto> GetCarDetailsByCarId(int carId);
-        IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId);
-        IDataResult<List<CarDetailDto>> GetCarDetailsColorId(int colorId);
-        IDataResult<List<CarDetailDto>> GetCarDetailsByBrandIdAndColorId(int brandId, int colorId);
         IDataResult<List<Car>> GetAll();
         IDataResult<Car> GetByCarId(int carId);
         IResult Delete(Car car);
         IResult Update(Car car);
 
-        IDataResult<List<CarDetailDto>> GetCarDetails();
+        IDataResult<List<CarDetailDto>> GetCarDetails(CarDetailFilter carDetailFilter);
 
     }
 }

@@ -4,6 +4,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.Context;
 using Entities.Concrete;
 using Entities.DTOs;
+using Entities.Filters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,8 @@ namespace DataAccess.Concrete.EntityFramework
                              FuelTypeName = f.FuelName,
                              GearTypeName = g.GearName,
                              ModelName = m.ModelName,
-                             TotalPrice = r.TotalPrice
+                             TotalPrice = r.TotalPrice,
+                             CustomerId = r.CustomerId,
 
                          };
         }
@@ -53,35 +55,26 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (ReCapProjectContext context = new ReCapProjectContext())
             {
-                var result =GetRentalDetailQuery(context).Where(r=>r.RentId == rentId).SingleOrDefault();
-                return result;
+                var result = GetRentalDetailQuery(context).Where(r => r.RentId == rentId);
+                return result.SingleOrDefault();
             }
         }
 
-        public List<RentalDetailDto> GetRentalDetails()
+        public List<RentalDetailDto> GetRentalDetails(RentalDetailFilter rentalDetailFilter)
         {
             using (ReCapProjectContext context = new ReCapProjectContext())
             {
-                var result = GetRentalDetailQuery(context).ToList();
+                var result = GetRentalDetailQuery(context);
 
-                return result;
+                result = rentalDetailFilter.CarId.HasValue ? result.Where(r => r.CarId == rentalDetailFilter.CarId): result;
+                result = rentalDetailFilter.CustomerId.HasValue ? result.Where(r=> r.CustomerId == rentalDetailFilter.CustomerId):result;
+
+                return result.ToList();
                              
                              
             }
         }
 
-        public RentalDetailDto IsRentable(Rental rental)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                var result = GetRentalDetailQuery(context).
-                    Where(c => c.CarId == rental.CarId && rental.RentDate <= c.ReturnDate &&
-                    rental.ReturnDate >= c.RentDate && rental.ReturnDateActual >= c.RentDate).SingleOrDefault();
-
-                return result;
-
-
-            }
-        }
+       
     }
 }

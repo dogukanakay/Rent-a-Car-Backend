@@ -12,6 +12,7 @@ namespace Entites.Concrete
     {
         [Key]
         public int CarId { get; set; }
+        public int LocationId { get; set; }
         public int ClassId { get; set; }
         public int BrandId { get; set; }
         public int ModelId { get; set; }

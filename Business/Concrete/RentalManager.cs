@@ -11,6 +11,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Entities.Filters;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -47,24 +48,31 @@ namespace Business.Concrete
 
         }
 
-        public IDataResult<Rental> Get(int id)
+        public IDataResult<Rental> Get(int rentId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentId == id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentId == rentId));
         }
         [CacheAspect]
         [PerformanceAspect(0)]
         [TransactionScopeAspect]
-        [LogAspect(typeof(FileLogger))]
+        //[LogAspect(typeof(FileLogger))]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.ExampleSuccessMessage);
         }
 
-        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails(RentalDetailFilter rentalDetailFilter)
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.ExampleSuccessMessage);
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(rentalDetailFilter), Messages.ExampleSuccessMessage);
 
         }
+
+        public IDataResult<RentalDetailDto> GetRentalDetailsByRentId(int rentId)
+        {
+            return new SuccessDataResult<RentalDetailDto>(_rentalDal.GetRentalDetailsByRentId(rentId), Messages.ExampleSuccessMessage);
+
+        }
+
         [ValidationAspect(typeof(RentalValidator))]
         public IResult IsRentable(Rental rental)
         {

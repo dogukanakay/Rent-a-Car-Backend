@@ -8,6 +8,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entites.Concrete;
 using Entities.DTOs;
+using Entities.Filters;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -43,30 +44,17 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId)
-        {
-            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetailsByBrandId(brandId), Messages.ExampleSuccessMessage);
-        }
-
-        public IDataResult< List<CarDetailDto>> GetCarDetailsColorId(int colorId)
-        {
-            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetailsByColorId(colorId), Messages.ExampleSuccessMessage);
-        }
+       
         [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>( _carDal.GetAll(), Messages.ExampleSuccessMessage);
         }
         //[SecuredOperation("car.GetCarDetails, admin")]
-        [CacheAspect]
-        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        //[CacheAspect]
+        public IDataResult<List<CarDetailDto>> GetCarDetails(CarDetailFilter carDetailFilter)
         {
-            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetails(), Messages.ExampleSuccessMessage);
-        }
-
-        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandIdAndColorId(int brandId, int colorId)
-        {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailsByBrandIdAndColorId(brandId, colorId), Messages.ExampleSuccessMessage);
+            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetails(carDetailFilter), Messages.ExampleSuccessMessage);
         }
 
         public IDataResult<CarDetailDto> GetCarDetailsByCarId(int carId)
