@@ -16,5 +16,7 @@ namespace Entities.Filters
         public int? GearId { get; set; }
         public int? FuelId { get; set; }
         public int? ColorId { get; set; }
+        public DateTime? RentDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }

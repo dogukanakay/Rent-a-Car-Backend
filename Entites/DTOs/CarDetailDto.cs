@@ -17,6 +17,7 @@ namespace Entities.DTOs
         public double DailyPrice { get; set; }
         public int FindexScore { get; set; }
         public string Description { get; set; }
+       
 
 
     }

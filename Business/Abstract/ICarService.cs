@@ -20,6 +20,8 @@ namespace Business.Abstract
         IResult Update(Car car);
 
         IDataResult<List<CarDetailDto>> GetCarDetails(CarDetailFilter carDetailFilter);
+        
+
 
     }
 }

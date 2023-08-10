@@ -17,7 +17,7 @@ namespace Entities.DTOs
         public string FuelTypeName { get; set; }
         public string CustomerName { get; set; }
         public DateTime RentDate { get; set; }
-        public DateTime ReturnDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
         public DateTime? ReturnDateActual { get; set; }
         public double TotalPrice { get; set; }
     }

@@ -10,17 +10,14 @@ namespace Business.Constants
     {
         public static string ExampleSuccessMessage = "İşlem gerçekleştirildi.";
         public static string ExampleErrorMessage = "İşlem gerçekleştirilemedi.";
+        public static string CarAdded = "Araç Başarıyla Eklendi";
+        public static string CarDeleted = "Araç Başarıyla Silindi";
+        public static string CarUpdated = "Araç Saşarıyla Güncellendi";
+        public static string CarsListed = "Araçlar Listelendi.";
 
-        public static string ProductAdded = "Ürün eklendi.";
-        public static string ProductNameInvalid = "Ürün ismi geçersiz.";
-        public static string MaintenanceTime = "Sistem bakımda.";
-        public static string ProductsListed = "Ürünler listelendi.";
-        public static string UnitPriceInvalid = "Geçersiz ürün fiyatı";
-        public static string ProductCountOfCategoryError = "Kategori max ürün sayısına ulaştı";
         public static string AuthorizationDenied = "Yetkiniz yok.";
 
-        public static string ProductDeleted = "Ürün başarıyla silindi";
-        public static string ProductUpdated = "Ürün başarıyla güncellendi";
+        
 
         public static string UserNotFound = "Kullanıcı bulunamadı";
         public static string PasswordError = "Şifre hatalı";
@@ -29,8 +26,7 @@ namespace Business.Constants
         public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
         public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
 
-        public static string ProductNameAlreadyExists = "Ürün ismi zaten mevcut";
-        public static string CarAlreadyRented = "Bu araba şu an zaten kirada.";
+       
 
     }
 }

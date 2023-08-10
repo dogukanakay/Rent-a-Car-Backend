@@ -4,6 +4,7 @@ using DataAccess.Concrete.Context;
 using Entites.Concrete;
 using Entities.DTOs;
 using Entities.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +16,7 @@ namespace DataAccess.Concrete.EntityFramework
      
 
 
-        private IQueryable<CarDetailDto> GetCarDetailQuery(ReCapProjectContext context)
+        private IQueryable<CarDetailDto> GetCarDetailQuery(ReCapProjectContext context )
         {
             return from c in context.Cars
                    join co in context.Colors on c.ColorId equals co.ColorId
@@ -43,7 +44,8 @@ namespace DataAccess.Concrete.EntityFramework
                        FuelId = c.FuelTypeId,
                        GearId = c.GearTypeId,
                        ModelId = c.ModelId,
-                       LocationId = c.LocationId
+                       LocationId = c.LocationId,
+                       
                    };
         }
 
@@ -53,12 +55,19 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = GetCarDetailQuery(context);
 
+                result = result.Where(c =>
+                       !(context.Rentals.Any(r => r.CarId == c.CarId
+                          && ((carDetailFilter.RentDate.HasValue && r.ReturnDate > carDetailFilter.RentDate)
+                          || (carDetailFilter.ReturnDate.HasValue && r.RentDate < carDetailFilter.ReturnDate)))));
                 result = carDetailFilter.LocationId.HasValue ? result.Where(c => c.LocationId == carDetailFilter.LocationId) : result;
                 result = carDetailFilter.BrandId.HasValue ? result.Where(c => c.BrandId == carDetailFilter.BrandId) : result;
                 result = carDetailFilter.ColorId.HasValue ? result.Where(c => c.ColorId == carDetailFilter.ColorId) : result;
                 result = carDetailFilter.FuelId.HasValue ? result.Where(c => c.FuelId == carDetailFilter.FuelId) : result;
                 result = carDetailFilter.GearId.HasValue ? result.Where(c => c.GearId == carDetailFilter.GearId) : result;
                 result = carDetailFilter.ModelId.HasValue ? result.Where(c => c.ModelId == carDetailFilter.ModelId) : result;
+               
+
+
 
 
                 return result.ToList();
@@ -76,5 +85,7 @@ namespace DataAccess.Concrete.EntityFramework
 
             }
         }
+
+
     }
 }
