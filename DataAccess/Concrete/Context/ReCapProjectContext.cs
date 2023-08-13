@@ -21,6 +21,8 @@ namespace DataAccess.Concrete.Context
         public DbSet<Model> Models { get; set; }
         public DbSet<CarClass> CarClasses { get; set; }
         public DbSet<RentalLocation> RentalLocations { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PaymentCard> PaymentCards { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

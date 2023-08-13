@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Model : IEntity
+    public class Payment : IEntity
     {
         [Key]
-        public int ModelId { get; set; }
-        public int BrandId { get; set; }
-        public string ModelName { get; set; }
+        public int PaymentId { get; set; }
+        public int CustomerId { get; set; }
+        public int RentId { get; set; }
+        public double AmountPaid { get; set; }
     }
 }

@@ -40,6 +40,27 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
+            builder.RegisterType<ModelManager>().As<IModelService>().SingleInstance();
+            builder.RegisterType<EfModelDal>().As<IModelDal>().SingleInstance();
+
+            builder.RegisterType<CarClassManager>().As<ICarClassService>().SingleInstance();
+            builder.RegisterType<EfCarClassDal>().As<ICarClassDal>().SingleInstance();
+
+            builder.RegisterType<FuelTypeManager>().As<IFuelTypeService>().SingleInstance();
+            builder.RegisterType<EfFuelTypeDal>().As<IFuelTypeDal>().SingleInstance();
+
+            builder.RegisterType<GearTypeManager>().As<IGearTypeService>().SingleInstance();
+            builder.RegisterType<EfGearTypeDal>().As<IGearTypeDal>().SingleInstance();
+
+            builder.RegisterType<PaymentCardManager>().As<IPaymentCardService>().SingleInstance();
+            builder.RegisterType<EfPaymentCardDal>().As<IPaymentCardDal>().SingleInstance();
+
+            builder.RegisterType<PaymentManager>().As<IPaymentService>().SingleInstance();
+            builder.RegisterType<EfPaymentDal>().As<IPaymentDal>().SingleInstance();
+
+            builder.RegisterType<RentalLocationManager>().As<IRentalLocationService>().SingleInstance();
+            builder.RegisterType<EfRentalLocationDal>().As<IRentalLocationDal>().SingleInstance();
+
             builder.RegisterType<CarImagesManager>().As<ICarImagesService>().SingleInstance();
             builder.RegisterType<EfCarImagesDal>().As<ICarImagesDal>().SingleInstance();
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
