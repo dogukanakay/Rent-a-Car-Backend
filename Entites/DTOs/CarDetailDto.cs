@@ -7,7 +7,7 @@ namespace Entities.DTOs
     {
         public int CarId { get; set; }
         public string LocationName { get; set; }
-        public string ClassName { get; set; }
+        public string ClassName { get; set; }   
         public string BrandName { get; set; }
         public string ModelName { get; set; }
         public string GearTypeName { get; set; }

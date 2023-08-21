@@ -31,6 +31,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<PaymentCard>>(_paymentCardDal.GetAll(), Messages.PaymentCardListed);
         }
 
+        public IDataResult<List<PaymentCard>> GetByCustomerId(int customerId)
+        {
+            return new SuccessDataResult<List<PaymentCard>>(_paymentCardDal.GetAll(p=>p.CustomerId==customerId), Messages.PaymentCardListed);
+        }
+
         public IDataResult<PaymentCard> GetById(int paymentCardId)
         {
             return new SuccessDataResult<PaymentCard>(_paymentCardDal.Get(p=>p.CardId == paymentCardId), Messages.PaymentCardListed);

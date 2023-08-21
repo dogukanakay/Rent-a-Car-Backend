@@ -30,6 +30,11 @@ namespace Business.Concrete
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
 
+        public IResult IsAuthenticated()
+        {
+            return new SuccessResult("Bu sayfaya erişimi var.");
+        }
+
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByEmail(userForLoginDto.Email).Data;

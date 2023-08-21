@@ -12,6 +12,8 @@ namespace Business.Abstract
 
         IDataResult<List<PaymentCard>> GetAll();
         IDataResult<PaymentCard> GetById(int paymentCardId);
+
+        IDataResult<List<PaymentCard>> GetByCustomerId(int customerId);
     }
 
 }
