@@ -23,8 +23,8 @@ namespace DataAccess.Concrete.EntityFramework
                    join cl in context.CarClasses on c.ClassId equals cl.ClassId
                    join b in context.Brands on c.BrandId equals b.BrandId
                    join m in context.Models on c.ModelId equals m.ModelId
-                   join f in context.FuelTypes on c.FuelTypeId equals f.FuelId
-                   join g in context.GearTypes on c.GearTypeId equals g.GearId
+                   join f in context.FuelTypes on c.FuelId equals f.FuelId
+                   join g in context.GearTypes on c.GearId equals g.GearId
                    join l in context.RentalLocations on c.LocationId equals l.LocationId
                    select new CarDetailDto
                    {
@@ -41,8 +41,8 @@ namespace DataAccess.Concrete.EntityFramework
                        FindexScore = c.FindexScore,
                        ColorId = c.ColorId,
                        BrandId = c.BrandId,
-                       FuelId = c.FuelTypeId,
-                       GearId = c.GearTypeId,
+                       FuelId = c.FuelId,
+                       GearId = c.GearId,
                        ModelId = c.ModelId,
                        LocationId = c.LocationId,
                        

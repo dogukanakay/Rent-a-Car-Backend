@@ -28,9 +28,9 @@ namespace DataAccess.Concrete.EntityFramework
                          join u in context.Users
                          on cu.UserId equals u.Id
                          join g in context.GearTypes
-                         on c.GearTypeId equals g.GearId
+                         on c.GearId equals g.GearId
                          join f in context.FuelTypes
-                         on c.FuelTypeId equals f.FuelId
+                         on c.FuelId equals f.FuelId
                          join m in context.Models
                          on c.ModelId equals m.ModelId
 

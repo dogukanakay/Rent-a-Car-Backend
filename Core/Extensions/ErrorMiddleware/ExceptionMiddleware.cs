@@ -55,6 +55,16 @@ namespace Core.Extensions.ErrorMiddleware
                 }.ToString()); ;
 
 
+            }else if(e.GetType() == typeof(UnauthorizedAccessException))
+            {
+                message = e.Message;
+                httpContext.Response.StatusCode = 400;
+
+                return httpContext.Response.WriteAsync(new ErrorDetails
+                {
+                    StatusCode = 401,
+                    Message = message,
+                }.ToString()); ;
             }
 
             return httpContext.Response.WriteAsync(new ErrorDetails

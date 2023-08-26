@@ -50,7 +50,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>( _carDal.GetAll(), Messages.CarsListed);
         }
-        //[SecuredOperation("car.GetCarDetails, admin")]
+        [SecuredOperation("car.GetCarDetails,admin")]
         //[CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails(CarDetailFilter carDetailFilter)
         {
