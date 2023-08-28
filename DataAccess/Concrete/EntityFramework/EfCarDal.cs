@@ -6,6 +6,7 @@ using Entities.DTOs;
 using Entities.Filters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 
@@ -18,6 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         private IQueryable<CarDetailDto> GetCarDetailQuery(ReCapProjectContext context )
         {
+
             return from c in context.Cars
                    join co in context.Colors on c.ColorId equals co.ColorId
                    join cl in context.CarClasses on c.ClassId equals cl.ClassId
@@ -30,6 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
                    {
                        CarId = c.CarId,
                        ClassName = cl.ClassName,
+                       LocationName = l.LocationName,
                        BrandName = b.BrandName,
                        ModelName = m.ModelName,
                        FuelTypeName = f.FuelName,
@@ -45,7 +48,11 @@ namespace DataAccess.Concrete.EntityFramework
                        GearId = c.GearId,
                        ModelId = c.ModelId,
                        LocationId = c.LocationId,
-                       
+                       ImagePath = context.CarImages
+                           .Where(ci => ci.CarId == c.CarId)
+                           .OrderBy(ci => ci.CarImageId)
+                           .Select(ci => ci.ImagePath)
+                           .FirstOrDefault() ?? "default.jpg"
                    };
         }
 
@@ -65,6 +72,8 @@ namespace DataAccess.Concrete.EntityFramework
                 result = carDetailFilter.FuelId.HasValue ? result.Where(c => c.FuelId == carDetailFilter.FuelId) : result;
                 result = carDetailFilter.GearId.HasValue ? result.Where(c => c.GearId == carDetailFilter.GearId) : result;
                 result = carDetailFilter.ModelId.HasValue ? result.Where(c => c.ModelId == carDetailFilter.ModelId) : result;
+
+                
                
 
 
