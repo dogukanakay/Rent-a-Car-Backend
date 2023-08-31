@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utilities.Results;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace Business.Abstract
         public IDataResult<List<User>> GetAll();
         public IDataResult<List<OperationClaim>> GetClaims(User user);
         public IDataResult<User> GetByEmail(string email);
+        public IDataResult<UserDetailDto> GetUserDetailsByEmail(string email);
     }
 }

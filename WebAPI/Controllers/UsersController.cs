@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
 using Core.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace WebAPI.Controllers
 {
@@ -58,6 +60,19 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpGet("getbyemail")]
+        [Authorize]
+        public IActionResult GetByEmail() 
+        {
+            string userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = _userService.GetUserDetailsByEmail(userEmail);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return Unauthorized(result);
         }
 
 

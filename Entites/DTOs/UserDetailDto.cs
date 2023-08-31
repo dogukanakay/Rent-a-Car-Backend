@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Entities.DTOs
 {
-    public class UserForRegisterDto:IDto
+    public class UserDetailDto:IDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public string CompanyName { get; set; }
+        public int FindexScore { get; set; }
     }
 }

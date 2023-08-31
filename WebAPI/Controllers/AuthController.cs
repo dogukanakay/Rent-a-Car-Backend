@@ -3,6 +3,7 @@ using Entities.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebAPI.Controllers
 {
@@ -63,6 +64,7 @@ namespace WebAPI.Controllers
 
         public IActionResult IsAuthenticated()
         {
+            Console.WriteLine(HttpContext.User);
             var result = _authService.IsAuthenticated();
             return Ok(result);
         }

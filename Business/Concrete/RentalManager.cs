@@ -19,18 +19,21 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
-        public RentalManager(IRentalDal rentalDal)
+        IPaymentDal _paymentDal;
+        public RentalManager(IRentalDal rentalDal, IPaymentDal paymentDal)
         {
             _rentalDal = rentalDal;
+            _paymentDal = paymentDal;
         }
         [TransactionScopeAspect]
         [CacheRemoveAspect("IRentalService.Get")]
         
-        public IResult Add(Rental rental)
+        public IResult Add(Rental rental, Payment payment)
         {
             if(IsRentable(rental).Success)
             {
-                _rentalDal.Add(rental); 
+                _rentalDal.Add(rental);
+                
                 return new SuccessResult(Messages.ExampleSuccessMessage);
             }
             else
@@ -54,7 +57,7 @@ namespace Business.Concrete
         }
         [CacheAspect]
         [PerformanceAspect(0)]
-        [TransactionScopeAspect]
+        
         //[LogAspect(typeof(FileLogger))]
         public IDataResult<List<Rental>> GetAll()
         {

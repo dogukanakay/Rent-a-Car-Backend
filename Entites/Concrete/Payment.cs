@@ -13,7 +13,7 @@ namespace Entities.Concrete
         [Key]
         public int PaymentId { get; set; }
         public int CustomerId { get; set; }
-        public int RentId { get; set; }
+        public int? RentId { get; set; }
         public double AmountPaid { get; set; }
     }
 }

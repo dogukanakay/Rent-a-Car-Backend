@@ -12,7 +12,7 @@ namespace Business.Abstract
 {
     public interface IRentalService
     {
-        public IResult Add(Rental rental);
+        public IResult Add(Rental rental, Payment payment);
         public IResult Delete(Rental rental);
         public IResult Update(Rental rental);
         public IDataResult<List<Rental>> GetAll();

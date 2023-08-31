@@ -4,6 +4,7 @@ using Core.Entities.Concrete;
 using Core.Utilities.Hashing;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Tokens;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace Business.Concrete
     public class AuthManager : IAuthService
     {
         IUserService _userService;
+        ICustomerService _customerService;
         ITokenHelper _tokenHelper;
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICustomerService customerService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
+            _customerService = customerService;
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
@@ -65,6 +68,16 @@ namespace Business.Concrete
 
             };
             _userService.Add(user);
+            Random random = new Random();
+            var customer = new Customer
+            {
+                UserId = _userService.GetByEmail(userForRegisterDto.Email).Data.Id,
+                CompanyName = userForRegisterDto.CompanyName,
+                FindexScore = random.Next(0,1901) // GEÇİCİ OLARAK BÖYLE - GERÇEK VEYA FAKE FİNDEX SERVİSİ KULLANILACAK
+
+            };
+
+            _customerService.Add(customer);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
