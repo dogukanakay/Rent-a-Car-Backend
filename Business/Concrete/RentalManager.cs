@@ -33,6 +33,10 @@ namespace Business.Concrete
             if(IsRentable(rental).Success)
             {
                 _rentalDal.Add(rental);
+
+                payment.RentId = rental.RentId;
+
+                _paymentDal.Add(payment);
                 
                 return new SuccessResult(Messages.ExampleSuccessMessage);
             }
