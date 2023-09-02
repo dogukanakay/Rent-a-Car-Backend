@@ -19,11 +19,13 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
-        IPaymentDal _paymentDal;
-        public RentalManager(IRentalDal rentalDal, IPaymentDal paymentDal)
+        IPaymentService _paymentService;
+        ICustomerService _customerService;
+        public RentalManager(IRentalDal rentalDal, IPaymentService paymentService, ICustomerService customerService)
         {
             _rentalDal = rentalDal;
-            _paymentDal = paymentDal;
+            _paymentService = paymentService;
+            _customerService = customerService;
         }
         [TransactionScopeAspect]
         [CacheRemoveAspect("IRentalService.Get")]
@@ -32,11 +34,17 @@ namespace Business.Concrete
         {
             if(IsRentable(rental).Success)
             {
+                var customerId = _customerService.GetCustomerIdByUserId(rental.CustomerId).Data;
+
+                rental.CustomerId = customerId;
+                payment.CustomerId = customerId;
+
                 _rentalDal.Add(rental);
 
                 payment.RentId = rental.RentId;
 
-                _paymentDal.Add(payment);
+                _paymentService.Add(payment);
+
                 
                 return new SuccessResult(Messages.ExampleSuccessMessage);
             }
@@ -87,7 +95,7 @@ namespace Business.Concrete
                     rental.ReturnDate >= c.RentDate && rental.ReturnDateActual >= c.RentDate);
                
 
-            if(rentCar == null)
+            if(rentCar ==null)
             {
                 return new SuccessResult();
             }

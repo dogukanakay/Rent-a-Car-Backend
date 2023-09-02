@@ -36,6 +36,7 @@ namespace DataAccess.Concrete.EntityFramework
                              where u.Email == email
                              select new UserDetailDto
                              {
+                                 Id = u.Id,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
                                  Email = u.Email,

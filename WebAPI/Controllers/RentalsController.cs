@@ -31,9 +31,9 @@ namespace WebAPI.Controllers
 
         [HttpPost("add")]
 
-        public IActionResult Add(Rental rental, Payment payment)
+        public IActionResult Add(RentalPaymentModel rentalPaymentModel)
         {
-            var result = _rentalService.Add(rental, payment);
+            var result = _rentalService.Add(rentalPaymentModel.Rental, rentalPaymentModel.Payment);
             if (result.Success)
             {
                 return Ok(result);

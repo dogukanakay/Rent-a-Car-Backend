@@ -65,7 +65,7 @@ namespace DataAccess.Concrete.EntityFramework
                 result = result.Where(c =>
                        !(context.Rentals.Any(r => r.CarId == c.CarId
                           && ((carDetailFilter.RentDate.HasValue && r.ReturnDate > carDetailFilter.RentDate)
-                          || (carDetailFilter.ReturnDate.HasValue && r.RentDate < carDetailFilter.ReturnDate)))));
+                          && (carDetailFilter.ReturnDate.HasValue && r.RentDate < carDetailFilter.ReturnDate)))));
                 result = carDetailFilter.LocationId.HasValue ? result.Where(c => c.LocationId == carDetailFilter.LocationId) : result;
                 result = carDetailFilter.BrandId.HasValue ? result.Where(c => c.BrandId == carDetailFilter.BrandId) : result;
                 result = carDetailFilter.ColorId.HasValue ? result.Where(c => c.ColorId == carDetailFilter.ColorId) : result;
