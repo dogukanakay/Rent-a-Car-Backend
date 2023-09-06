@@ -20,25 +20,26 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-
+        [CacheRemoveAspect("IColorService.Get")]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
-
+        [CacheRemoveAspect("IColorService.Get")]
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
-
+        [CacheAspect]
         public IDataResult<List<Color>> GetAll()
         {
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ExampleSuccessMessage);
         }
-
+        [CacheRemoveAspect("IColorService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);

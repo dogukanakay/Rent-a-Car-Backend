@@ -19,24 +19,26 @@ namespace Business.Concrete
         {
             _brandDal= brandDal;
         }
-
+        [CacheRemoveAspect("IBrandService.Get")]
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
-
+        [CacheRemoveAspect("IBrandService.Get")]
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
-
+        [CacheAspect]
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.ExampleSuccessMessage);
         }
+        [CacheRemoveAspect("IBrandService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);

@@ -48,6 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
                              ModelName = m.ModelName,
                              TotalPrice = r.TotalPrice,
                              CustomerId = r.CustomerId,
+                             TransactionDate = r.TransactionDate,
 
                          };
         }

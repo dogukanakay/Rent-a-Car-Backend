@@ -22,6 +22,7 @@ namespace Entities.Concrete
         public DateTime? ReturnDate { get; set; }
         public DateTime? ReturnDateActual { get; set; }
         public double TotalPrice { get; set; }
+        public DateTime? TransactionDate { get; set; }
 
     }
 }

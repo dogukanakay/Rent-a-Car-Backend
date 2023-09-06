@@ -12,6 +12,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using Entities.Filters;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -34,11 +35,7 @@ namespace Business.Concrete
         {
             if(IsRentable(rental).Success)
             {
-                var customerId = _customerService.GetCustomerIdByUserId(rental.CustomerId).Data;
-
-                rental.CustomerId = customerId;
-                payment.CustomerId = customerId;
-
+                rental.TransactionDate = DateTime.Now;
                 _rentalDal.Add(rental);
 
                 payment.RentId = rental.RentId;
@@ -78,6 +75,7 @@ namespace Business.Concrete
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails(RentalDetailFilter rentalDetailFilter)
         {
+           
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(rentalDetailFilter), Messages.ExampleSuccessMessage);
 
         }
@@ -92,7 +90,7 @@ namespace Business.Concrete
         public IResult IsRentable(Rental rental)
         {
             var rentCar = _rentalDal.Get(c => c.CarId == rental.CarId && rental.RentDate <= c.ReturnDate &&
-                    rental.ReturnDate >= c.RentDate && rental.ReturnDateActual >= c.RentDate);
+                    rental.ReturnDate >= c.RentDate );
                
 
             if(rentCar ==null)

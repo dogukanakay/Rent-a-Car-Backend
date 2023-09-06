@@ -30,7 +30,7 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.CarAdded);
                                     
         }
-
+        [SecuredOperation("admin")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
