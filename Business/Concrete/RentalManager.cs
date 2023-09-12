@@ -47,7 +47,7 @@ namespace Business.Concrete
             }
             else
             {
-                return new ErrorResult(Messages.ExampleErrorMessage);
+                return new ErrorResult(Messages.CarAlreadyRented);
             }
            
            

@@ -42,6 +42,8 @@ namespace Business.Constants
         public static string FuelTypeDeleted = "Yakıt Türü Silindi";
         public static string FuelTypeListed = "Yakıt Türü Listelendi";
 
+        public static string CarAlreadyRented = "Araç kiralanamaz. Lütfen başka bir araç seçiniz.";
+
         public static string GearTypeAdded = "Vites Türü Eklendi";
         public static string GearTypeUpdated = "Vites Türü Güncellendi";
         public static string GearTypeDeleted = "Vites Türü Silindi";
