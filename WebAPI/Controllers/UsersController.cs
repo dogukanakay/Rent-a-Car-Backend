@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,11 @@ namespace WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         IUserService _userService;
-        public UsersController(IUserService userService)
+        ICustomerService _customerService;
+        public UsersController(IUserService userService, ICustomerService customerService)
         {
             _userService = userService;
+            _customerService = customerService;
         }
 
         [HttpGet("getall")]
@@ -62,6 +65,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+
         [HttpGet("getbyemail")]
         [Authorize]
         public IActionResult GetByEmail() 
@@ -73,6 +77,29 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return Unauthorized(result);
+        }
+
+        [HttpPost("updatebyuserdetaildto")]
+        [Authorize]
+        public IActionResult UpdateByUserDetailDto(UserDetailDto userDetailDto)
+        {
+            //GEÇİCİ OLARAK EKLENDİ REFACTOR EDİLİP BUSINESS İÇİNE ÇEKİLECEK
+            var user = _userService.GetByUserId(userDetailDto.Id).Data;
+            user.FirstName = userDetailDto.FirstName;
+            user.LastName = userDetailDto.LastName;
+            var userResult = _userService.Update(user);
+
+            var customer = _customerService.GetByCustomerId(userDetailDto.CustomerId).Data;
+            customer.CompanyName = userDetailDto.CompanyName;
+            
+            var customerResult = _customerService.Update(customer);
+            
+            if((userResult.Success && customerResult.Success) || (userResult.Success && userDetailDto.CompanyName==null)) 
+            {
+                return Ok(userResult);
+            }
+            return BadRequest(userResult);
+            
         }
 
 

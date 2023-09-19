@@ -21,12 +21,10 @@ namespace Business.Concrete
     {
         IRentalDal _rentalDal;
         IPaymentService _paymentService;
-        ICustomerService _customerService;
-        public RentalManager(IRentalDal rentalDal, IPaymentService paymentService, ICustomerService customerService)
+        public RentalManager(IRentalDal rentalDal, IPaymentService paymentService)
         {
             _rentalDal = rentalDal;
             _paymentService = paymentService;
-            _customerService = customerService;
         }
         [TransactionScopeAspect]
         [CacheRemoveAspect("IRentalService.Get")]

@@ -64,6 +64,12 @@ namespace Business.Constants
         public static string ColorDeleted = "Renk Silindi";
         public static string ColorListed = "Renk Listelendi";
 
+        public static string UserUpdated = "Kullanıcı güncellendi";
+
+
+
+        public static string CustomerUpdated = "Müşteri güncellendi";
+
         public static string UserNotFound = "Kullanıcı bulunamadı";
         public static string PasswordError = "Şifre hatalı";
         public static string SuccessfulLogin = "Sisteme giriş başarılı";

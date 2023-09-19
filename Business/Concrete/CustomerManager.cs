@@ -1,15 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -38,6 +35,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.ExampleSuccessMessage);
         }
 
+        public IDataResult<Customer> GetByCustomerId(int customerId)
+        {
+            return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.CustomerId == customerId));
+        }
+
         public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
         {
             return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), Messages.ExampleSuccessMessage);
@@ -48,10 +50,15 @@ namespace Business.Concrete
             return new SuccessDataResult<int>(_customerDal.Get(c=>c.UserId ==  userId).CustomerId);
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
             return new SuccessResult(Messages.ExampleSuccessMessage);
         }
+
+
+
+        
     }
 }
