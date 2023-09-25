@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Security.Claims;
 
 namespace WebAPI.Controllers
 {
@@ -67,6 +68,21 @@ namespace WebAPI.Controllers
             Console.WriteLine(HttpContext.User);
             var result = _authService.IsAuthenticated();
             return Ok(result);
+        }
+
+        [HttpPost("updatepassword")]
+        [Authorize]
+
+        public IActionResult UpdatePassword(SetNewPasswordForUserDto setNewPasswordForUserDto)
+        {
+            string userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = _authService.SetNewPassword(setNewPasswordForUserDto, userEmail);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         
     }
