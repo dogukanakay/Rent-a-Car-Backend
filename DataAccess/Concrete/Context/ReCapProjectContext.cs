@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=ABRA; Database= ReCapProject; Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=ABRA; Database= RentACar; Trusted_Connection=true");
         }
     }
 }
