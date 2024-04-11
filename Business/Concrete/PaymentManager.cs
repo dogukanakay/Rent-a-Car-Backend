@@ -34,7 +34,7 @@ namespace Business.Concrete
 
         public IDataResult<Payment> GetById(int paymentId)
         {
-            return new SuccessDataResult<Payment>(_paymentDal.Get(p=>p.PaymentId == paymentId), Messages.PaymentListed);
+            return new SuccessDataResult<Payment>(_paymentDal.Get(p=>p.Id == paymentId), Messages.PaymentListed);
         }
 
         public IResult Update(Payment payment)

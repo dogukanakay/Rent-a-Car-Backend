@@ -33,7 +33,7 @@ namespace Business.Concrete
 
         public IDataResult<RentalLocation> GetById(int rentalLocationId)
         {
-            return new SuccessDataResult<RentalLocation>(_rentalLocationDal.Get(r => r.LocationId == rentalLocationId), Messages.RentalLocaitonListed);
+            return new SuccessDataResult<RentalLocation>(_rentalLocationDal.Get(r => r.Id == rentalLocationId), Messages.RentalLocaitonListed);
         }
 
         public IResult Update(RentalLocation rentalLocation)

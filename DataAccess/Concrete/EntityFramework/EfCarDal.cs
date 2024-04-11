@@ -21,16 +21,16 @@ namespace DataAccess.Concrete.EntityFramework
         {
 
             return from c in context.Cars
-                   join co in context.Colors on c.ColorId equals co.ColorId
-                   join cl in context.CarClasses on c.ClassId equals cl.ClassId
-                   join b in context.Brands on c.BrandId equals b.BrandId
-                   join m in context.Models on c.ModelId equals m.ModelId
-                   join f in context.FuelTypes on c.FuelId equals f.FuelId
-                   join g in context.GearTypes on c.GearId equals g.GearId
-                   join l in context.RentalLocations on c.LocationId equals l.LocationId
+                   join co in context.Colors on c.ColorId equals co.Id
+                   join cl in context.CarClasses on c.ClassId equals cl.Id
+                   join b in context.Brands on c.BrandId equals b.Id
+                   join m in context.Models on c.ModelId equals m.Id
+                   join f in context.FuelTypes on c.FuelId equals f.Id
+                   join g in context.GearTypes on c.GearId equals g.Id
+                   join l in context.RentalLocations on c.LocationId equals l.Id
                    select new CarDetailDto
                    {
-                       CarId = c.CarId,
+                       CarId = c.Id,
                        ClassName = cl.ClassName,
                        LocationName = l.LocationName,
                        BrandName = b.BrandName,
@@ -49,8 +49,8 @@ namespace DataAccess.Concrete.EntityFramework
                        ModelId = c.ModelId,
                        LocationId = c.LocationId,
                        ImagePath = context.CarImages
-                           .Where(ci => ci.CarId == c.CarId)
-                           .OrderBy(ci => ci.CarImageId)
+                           .Where(ci => ci.CarId == c.Id)
+                           .OrderBy(ci => ci.Id)
                            .Select(ci => ci.ImagePath)
                            .FirstOrDefault() ?? "default.jpg"
                    };

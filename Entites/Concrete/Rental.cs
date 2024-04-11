@@ -1,4 +1,6 @@
 ﻿using Core.Entities.Abstract;
+using Core.Entities.Concrete;
+using Entites.Concrete;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Rental:IEntity
+    public class Rental:EntityBase<int>
     {
-        [Key]
-        public int RentId { get; set; }
+       
         public int CarId { get; set; }
         public int PickupLocationId { get; set; }
         public int DropoffLocationId { get; set; }
@@ -22,7 +23,12 @@ namespace Entities.Concrete
         public DateTime? ReturnDate { get; set; }
         public DateTime? ReturnDateActual { get; set; }
         public double TotalPrice { get; set; }
-        public DateTime? TransactionDate { get; set; }
+
+        public virtual Payment Payment { get; set; }
+
+        public virtual Customer Customer { get; set; }
+        public virtual Car Car { get; set; }
+        public virtual RentalLocation RentalLocation { get; set; }
 
     }
 }

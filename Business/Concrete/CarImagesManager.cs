@@ -33,7 +33,7 @@ namespace Business.Concrete
                 return result;
             }
             carImages.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesPath);
-            carImages.Date = DateTime.Now;
+            carImages.CreatedDate = DateTime.Now;
             _carImagesDal.Add(carImages);
             return new SuccessResult("Resim başarıyla yüklendi.");
         }
@@ -49,7 +49,7 @@ namespace Business.Concrete
         {
 
             carImages.ImagePath = _fileHelper.Update(file, PathConstants.ImagesPath + carImages.ImagePath, PathConstants.ImagesPath);
-            carImages.Date = DateTime.Now;
+            carImages.CreatedDate = DateTime.Now;
             _carImagesDal.Update(carImages);
             return new SuccessResult();
 
@@ -72,7 +72,7 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetById(int id)
         {
-            return new SuccessDataResult<CarImage>(_carImagesDal.Get(c => c.CarImageId == id));
+            return new SuccessDataResult<CarImage>(_carImagesDal.Get(c => c.Id == id));
         }
 
         private IResult CheckIfCarImageLimit(int carId)
@@ -87,7 +87,7 @@ namespace Business.Concrete
 
         private IDataResult<List<CarImage>> GetDefaultImage(int carId)
         {
-            List<CarImage> carImages = new List<CarImage> { new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = "default.jpg" } };
+            List<CarImage> carImages = new List<CarImage> { new CarImage { CarId = carId, CreatedDate = DateTime.Now, ImagePath = "default.jpg" } };
             return new SuccessDataResult<List<CarImage>>(carImages);
         }
 

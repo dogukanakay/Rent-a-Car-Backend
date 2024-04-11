@@ -37,7 +37,7 @@ namespace Business.Concrete
 
         public IDataResult<Customer> GetByCustomerId(int customerId)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.CustomerId == customerId));
+            return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.Id == customerId));
         }
 
         public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
@@ -47,7 +47,7 @@ namespace Business.Concrete
 
         public IDataResult<int> GetCustomerIdByUserId(int userId)
         {
-            return new SuccessDataResult<int>(_customerDal.Get(c=>c.UserId ==  userId).CustomerId);
+            return new SuccessDataResult<int>(_customerDal.Get(c=>c.UserId ==  userId).Id);
         }
 
         [ValidationAspect(typeof(CustomerValidator))]

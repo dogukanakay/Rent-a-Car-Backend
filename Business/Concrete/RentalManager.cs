@@ -33,10 +33,10 @@ namespace Business.Concrete
         {
             if(IsRentable(rental).Success)
             {
-                rental.TransactionDate = DateTime.Now;
+                rental.CreatedDate = DateTime.Now;
                 _rentalDal.Add(rental);
 
-                payment.RentId = rental.RentId;
+                payment.RentId = rental.Id;
 
                 _paymentService.Add(payment);
 
@@ -60,7 +60,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> Get(int rentId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentId == rentId));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == rentId));
         }
         [CacheAspect]
         [PerformanceAspect(0)]

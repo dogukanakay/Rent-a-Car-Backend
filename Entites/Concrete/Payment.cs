@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Abstract;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,12 +9,15 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Payment : IEntity
+    public class Payment : EntityBase<int>
     {
-        [Key]
-        public int PaymentId { get; set; }
+        
         public int CustomerId { get; set; }
         public int? RentId { get; set; }
         public double AmountPaid { get; set; }
+
+
+        public virtual Customer Customer { get; set; }
+        public virtual Rental Rental { get; set; }
     }
 }

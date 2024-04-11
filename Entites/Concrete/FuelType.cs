@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Core.Entities.Concrete;
+using Entites.Concrete;
 namespace Entities.Concrete
 {
-    public class FuelType : IEntity
+    public class FuelType : EntityBase<int>
     {
-        [Key]
-        public int FuelId { get; set; }
+       
         public string FuelName { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

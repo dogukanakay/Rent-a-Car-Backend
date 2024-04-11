@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Abstract;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class PaymentCard : IEntity
+    public class PaymentCard : EntityBase<int>
     {
-        [Key]
-        public int CardId { get; set; }
+       
         public int CustomerId { get; set; }
         public string CardNumbers { get; set; }
         public int ValidMonth { get; set; }
         public int ValidYear { get; set; }
         public int Cvv { get; set; }
+
+        public virtual Customer Customer { get; set; }
 
     }
 }

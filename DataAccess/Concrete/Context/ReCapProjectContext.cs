@@ -26,7 +26,114 @@ namespace DataAccess.Concrete.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=ABRA; Database= RentACar; Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DOGUKAN\SQLEXPRESS; Database= RentACar; Trusted_Connection=true");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Model>()
+            //    .HasOne(i => i.Brand)
+            //    .WithMany(i => i.Models)
+            //    .HasForeignKey(i => i.BrandId);
+
+            modelBuilder.Entity<Brand>()
+                .HasMany(b => b.Models)
+                .WithOne(m => m.Brand)
+                .HasForeignKey(m => m.BrandId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Brand>()
+                .HasMany(b => b.Cars)
+                .WithOne(c => c.Brand)
+                .HasForeignKey(c => c.BrandId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CarClass>()
+                .HasMany(cc => cc.Cars)
+                .WithOne(c => c.CarClass)
+                .HasForeignKey(c => c.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Color>()
+                .HasMany(co => co.Cars)
+                .WithOne(c => c.Color)
+                .HasForeignKey(c => c.ColorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<FuelType>()
+                .HasMany(f => f.Cars)
+                .WithOne(c => c.FuelType)
+                .HasForeignKey(c => c.FuelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<GearType>()
+                .HasMany(g => g.Cars)
+                .WithOne(c => c.GearType)
+                .HasForeignKey(c => c.GearId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Model>()
+                .HasMany(m => m.Cars)
+                .WithOne(c => c.Model)
+                .HasForeignKey(c => c.ModelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RentalLocation>()
+                .HasMany(rl => rl.Cars)
+                .WithOne(c => c.RentalLocation)
+                .HasForeignKey(c => c.LocationId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RentalLocation>()
+                .HasMany(rl => rl.Rentals)
+                .WithOne(r => r.RentalLocation)
+                .HasForeignKey(r => r.PickupLocationId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RentalLocation>()
+               .HasMany(rl => rl.Rentals)
+               .WithOne(r => r.RentalLocation)
+               .HasForeignKey(r => r.DropoffLocationId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Car>()
+                .HasMany(c => c.CarImages)
+                .WithOne(ci => ci.Car)
+                .HasForeignKey(ci => ci.CarId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Car>()
+                .HasMany(c => c.Rentals)
+                .WithOne(r=>r.Car)
+                .HasForeignKey(r=>r.CarId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(cu=>cu.Payments)
+                .WithOne(p=>p.Customer)
+                .HasForeignKey(p=>p.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Customer>()
+               .HasMany(cu => cu.PaymentCards)
+               .WithOne(pc => pc.Customer)
+               .HasForeignKey(pc => pc.CustomerId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(cu => cu.Rentals)
+                .WithOne(r => r.Customer)
+                .HasForeignKey(r => r.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Rental>()
+               .HasOne(r=>r.Payment)
+               .WithOne(p=>p.Rental)
+               .HasForeignKey<Payment>(p=>p.RentId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+
+
         }
     }
 }

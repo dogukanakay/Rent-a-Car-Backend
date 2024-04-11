@@ -20,23 +20,23 @@ namespace DataAccess.Concrete.EntityFramework
         {
             return from c in context.Cars
                          join b in context.Brands
-                         on c.BrandId equals b.BrandId
+                         on c.BrandId equals b.Id
                          join r in context.Rentals
-                         on c.CarId equals r.CarId
+                         on c.Id equals r.CarId
                          join cu in context.Customers
-                         on r.CustomerId equals cu.CustomerId
+                         on r.CustomerId equals cu.Id
                          join u in context.Users
-                         on cu.UserId equals u.Id
+                         on cu.Id equals u.Id
                          join g in context.GearTypes
-                         on c.GearId equals g.GearId
+                         on c.GearId equals g.Id
                          join f in context.FuelTypes
-                         on c.FuelId equals f.FuelId
+                         on c.FuelId equals f.Id
                          join m in context.Models
-                         on c.ModelId equals m.ModelId
+                         on c.ModelId equals m.Id
 
                          select new RentalDetailDto
                          {
-                             RentId = r.RentId,
+                             RentId = r.Id,
                              CarId = r.CarId,
                              BrandName = b.BrandName,
                              CustomerName = u.FirstName + " " + u.LastName,
@@ -48,7 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
                              ModelName = m.ModelName,
                              TotalPrice = r.TotalPrice,
                              CustomerId = r.CustomerId,
-                             TransactionDate = r.TransactionDate,
+                             TransactionDate = r.CreatedDate,
 
                          };
         }

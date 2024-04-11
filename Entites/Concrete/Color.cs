@@ -1,4 +1,7 @@
 ﻿using Core.Entities.Abstract;
+using Core.Entities.Concrete;
+using Entites.Concrete;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Color : IEntity
+    public class Color : EntityBase<int>
     {
-        [Key]
-        public int ColorId { get; set; }
+       
         public string ColorName { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

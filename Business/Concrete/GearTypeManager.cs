@@ -34,7 +34,7 @@ namespace Business.Concrete
 
         public IDataResult<GearType> GetById(int gearTypeId)
         {
-            return new SuccessDataResult<GearType>(_gearTypeDal.Get(g => g.GearId == gearTypeId), Messages.GearTypeListed);
+            return new SuccessDataResult<GearType>(_gearTypeDal.Get(g => g.Id == gearTypeId), Messages.GearTypeListed);
         }
 
         public IResult Update(GearType gearType)

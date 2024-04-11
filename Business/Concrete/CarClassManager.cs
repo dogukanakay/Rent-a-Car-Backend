@@ -40,7 +40,7 @@ namespace Business.Concrete
 
         public IDataResult<CarClass> GetById(int carClassId)
         {
-            return new SuccessDataResult<CarClass>(_carClassDal.Get(c => c.ClassId == carClassId), Messages.CarsClassListed);
+            return new SuccessDataResult<CarClass>(_carClassDal.Get(c => c.Id == carClassId), Messages.CarsClassListed);
         }
         [CacheRemoveAspect("ICarClassService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
