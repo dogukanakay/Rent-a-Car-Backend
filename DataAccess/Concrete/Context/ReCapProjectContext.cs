@@ -134,6 +134,18 @@ namespace DataAccess.Concrete.Context
 
 
 
+            modelBuilder.Entity<User>()
+               .HasMany(u=>u.UserOperationClaims)
+               .WithOne(up=>up.User)
+               .HasForeignKey(up=>up.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<OperationClaim>()
+               .HasMany(oc=>oc.UserOperationClaims)
+               .WithOne(up=>up.OperationClaim)
+               .HasForeignKey(up=>up.OperationClaimId)
+               .OnDelete(DeleteBehavior.Restrict);
+              
         }
     }
 }
