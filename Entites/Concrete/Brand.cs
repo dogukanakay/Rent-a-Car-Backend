@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Brand:EntityBase<int>
+    public class Brand:Entity<int>
     {
         public string BrandName { get; set; }
         public virtual ICollection<Model> Models { get; set; }

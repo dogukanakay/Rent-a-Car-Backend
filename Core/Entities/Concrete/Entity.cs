@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Concrete
 {
-    public class EntityBase<T> : IEntity
+    public class Entity<T> : IEntity
     {
         public T Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        public DateTime? DeletedDate{ get; set; }
+        public DateTime? DeletedDate { get; set; }
     }
 }

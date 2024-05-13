@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Model : EntityBase<int>
+    public class Model : Entity<int>
     {
         public int BrandId { get; set; }
         public string ModelName { get; set; }

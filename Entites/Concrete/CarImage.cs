@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class CarImage:EntityBase<int>
+    public class CarImage:Entity<int>
     {
         public int CarId { get; set; }
         public string ImagePath { get; set; }

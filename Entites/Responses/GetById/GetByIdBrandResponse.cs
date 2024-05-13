@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.Concrete
+namespace Entities.Responses.GetById
 {
-    public class OperationClaim:Entity<int>
+    public class GetByIdBrandReponse  : IResponse
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-
-        public virtual ICollection<UserOperationClaim> UserOperationClaims { get;}
+        public int BrandName { get; set; }
     }
 }

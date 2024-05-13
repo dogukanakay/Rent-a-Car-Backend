@@ -5,13 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.Concrete
+namespace Entities.Responses.GetList
 {
-    public class OperationClaim:Entity<int>
+    public class GetListBrandResponse : IResponse
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string BrandName { get; set; }
 
-        public virtual ICollection<UserOperationClaim> UserOperationClaims { get;}
     }
 }

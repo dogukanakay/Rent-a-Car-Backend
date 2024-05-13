@@ -1,52 +1,84 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Requests.Create;
+using Entities.Requests.Update;
+using Entities.Responses.Create;
+using Entities.Responses.GetById;
+using Entities.Responses.GetList;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
     public class BrandManager : IBrandService
     {
-        IBrandDal _brandDal;
-        public BrandManager(IBrandDal brandDal)
+        private readonly IBrandDal _brandDal;
+        private readonly IMapper _mapper;
+        public BrandManager(IBrandDal brandDal, IMapper mapper)
         {
             _brandDal= brandDal;
+            _mapper= mapper;
         }
         [CacheRemoveAspect("IBrandService.Get")]
-        public IResult Add(Brand brand)
+        public IDataResult<CreateBrandResponse> Add(CreateBrand createBrand)
         {
+            Brand brand = _mapper.Map<Brand>(createBrand);
             _brandDal.Add(brand);
-            return new SuccessResult(Messages.ExampleSuccessMessage);
+            CreateBrandResponse createBrandResponse = _mapper.Map<CreateBrandResponse>(brand);
+            return new SuccessDataResult<CreateBrandResponse>(createBrandResponse,Messages.ExampleSuccessMessage);
         }
         [CacheRemoveAspect("IBrandService.Get")]
-        public IResult Delete(Brand brand)
+        public IResult Delete(int id)
         {
-            _brandDal.Delete(brand);
-            return new SuccessResult(Messages.ExampleSuccessMessage);
+           
+            var brand = _brandDal.Get(b => b.Id == id);
+            var updateBrand = _mapper.Map<UpdateBrand>(brand);
+            Update(updateBrand, DateTime.Now);
+            return new SuccessResult(brand.BrandName +" "+Messages.BrandDeleted);
         }
         [CacheAspect]
-        public IDataResult<List<Brand>> GetAll()
+        public IDataResult<List<GetListBrandResponse>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.ExampleSuccessMessage);
+            List<Brand> brands = _brandDal.GetAll(b=>!b.DeletedDate.HasValue);
+            List<GetListBrandResponse> getListBrandResponses = new List<GetListBrandResponse>();
+
+            foreach (var brand in brands)
+            {
+                getListBrandResponses.Add(_mapper.Map<GetListBrandResponse>(brand));
+            }
+            return new SuccessDataResult<List<GetListBrandResponse>>(getListBrandResponses,Messages.ExampleSuccessMessage);
         }
         [CacheRemoveAspect("IBrandService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         [CacheRemoveAspect("IRentalService.Get")]
-        public IResult Update(Brand brand)
+        public IResult Update(UpdateBrand updateBrand)
         {
+            Brand brand = _mapper.Map<Brand>(updateBrand);
+            brand.ModifiedDate = DateTime.Now;
             _brandDal.Update(brand);
-            return new SuccessResult(Messages.ExampleSuccessMessage);
+            return new SuccessResult(Messages.BrandUpdated);
         }
-        public IDataResult<Brand> GetById(int id)
+
+        [CacheRemoveAspect("IBrandService.Get")]
+        [CacheRemoveAspect("ICarService.Get")]
+        [CacheRemoveAspect("IRentalService.Get")]
+        public IResult Update(UpdateBrand updateBrand, DateTime dateTime)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == id));
+            Brand brand = _mapper.Map<Brand>(updateBrand);
+            brand.DeletedDate = dateTime;
+            _brandDal.Update(brand);
+            return new SuccessResult(Messages.BrandUpdated);
+        }
+        public IDataResult<GetByIdBrandReponse> GetById(int id)
+        {
+            var brand = _brandDal.Get(b => b.Id == id);
+            var getByIdBrandResponse = _mapper.Map<GetByIdBrandReponse>(brand);
+            return new SuccessDataResult<GetByIdBrandReponse>(getByIdBrandResponse);
         }
     }
 }

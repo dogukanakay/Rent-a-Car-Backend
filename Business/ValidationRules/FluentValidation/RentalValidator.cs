@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class RentalValidator:AbstractValidator<Rental>
+    public class RentalValidator : AbstractValidator<Rental>
     {
         public RentalValidator()
         {
-            RuleFor(r=>r.ReturnDate).GreaterThan(r=>r.RentDate).WithMessage("Hatalı tarih seçimi yaptınız.");
+            RuleFor(r => r.ReturnDate).GreaterThan(r => r.RentDate).WithMessage("Hatalı tarih seçimi yaptınız.");
         }
     }
 }

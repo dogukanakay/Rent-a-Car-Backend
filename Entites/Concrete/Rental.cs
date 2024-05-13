@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Rental:EntityBase<int>
+    public class Rental:Entity<int>
     {
        
         public int CarId { get; set; }

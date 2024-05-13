@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
-using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
+using Entities.Requests.Create;
+using Entities.Requests.Update;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -27,9 +27,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Brand brand)
+        public IActionResult Add(CreateBrand createBrand)
         {
-            var result = _brandService.Add(brand);
+            var result = _brandService.Add(createBrand);
             if (result.Success)
             {
                 return Ok(result);
@@ -39,9 +39,9 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("delete")]
-        public IActionResult Delete(Brand brand)
+        public IActionResult Delete(int id)
         {
-            var result = _brandService.Delete(brand);
+            var result = _brandService.Delete(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -50,9 +50,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(Brand brand)
+        public IActionResult Update(UpdateBrand updateBrand)
         {
-            var result = _brandService.Update(brand);
+            var result = _brandService.Update(updateBrand);
             if (result.Success)
             {
                 return Ok(result);

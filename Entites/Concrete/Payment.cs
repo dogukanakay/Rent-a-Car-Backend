@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Payment : EntityBase<int>
+    public class Payment : Entity<int>
     {
         
         public int CustomerId { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Concrete
 {
-    public class UserOperationClaim:EntityBase<int>
+    public class UserOperationClaim:Entity<int>
     {
         public int Id { get; set; }
         public int UserId { get; set; }

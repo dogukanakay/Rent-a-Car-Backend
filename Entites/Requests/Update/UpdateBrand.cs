@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.Concrete
+namespace Entities.Requests.Update
 {
-    public class OperationClaim:Entity<int>
+    public class UpdateBrand : IRequest
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-
-        public virtual ICollection<UserOperationClaim> UserOperationClaims { get;}
+        public string BrandName  { get; set; }
     }
 }

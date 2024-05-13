@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Core.Entities.Concrete
 {
-    public class User : EntityBase<int>
+    public class User : Entity<int>
     {
     
         public string FirstName { get; set; }

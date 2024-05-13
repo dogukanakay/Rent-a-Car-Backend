@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class RentalPaymentModel:EntityBase<int>
+    public class RentalPaymentModel:Entity<int>
     {
         public Rental Rental { get; set; }
         public Payment Payment { get; set; }

@@ -1,20 +1,19 @@
 ﻿using Core.Utilities.Results;
-using Entites.Concrete;
-using Entities.Concrete;
+using Entities.Requests.Create;
+using Entities.Requests.Update;
+using Entities.Responses.Create;
+using Entities.Responses.GetList;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
     public interface IBrandService
     {
-        IResult Add(Brand brand);
-        IDataResult<List<Brand>> GetAll();
-        IResult Delete(Brand brand);
-        IResult Update(Brand brand);
-        
+        IDataResult<CreateBrandResponse> Add(CreateBrand createBrand);
+        IDataResult<List<GetListBrandResponse>> GetAll();
+        IResult Delete(int id);
+        IResult Update(UpdateBrand updateBrand);
+        IResult Update(UpdateBrand updateBrand, DateTime dateTime);
     }
 }

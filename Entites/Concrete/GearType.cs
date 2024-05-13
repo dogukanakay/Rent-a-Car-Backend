@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class GearType:EntityBase<int>
+    public class GearType:Entity<int>
     {
         
         public string GearName { get; set;}

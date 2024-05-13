@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class RentalLocation : EntityBase<int>
+    public class RentalLocation : Entity<int>
     {
         public string LocationName { get; set; }
         public virtual ICollection<Car> Cars { get; set; }

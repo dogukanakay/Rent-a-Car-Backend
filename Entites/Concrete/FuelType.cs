@@ -9,7 +9,7 @@ using Core.Entities.Concrete;
 using Entites.Concrete;
 namespace Entities.Concrete
 {
-    public class FuelType : EntityBase<int>
+    public class FuelType : Entity<int>
     {
        
         public string FuelName { get; set; }

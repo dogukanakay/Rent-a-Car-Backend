@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Entites.Concrete
 {
-    public class Car:EntityBase<int>
+    public class Car:Entity<int>
     {
         public int LocationId { get; set; }
         public int ClassId { get; set; }
